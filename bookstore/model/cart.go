@@ -19,10 +19,10 @@ func (c *Cart)GetTotalCount()int64{
 }
 
 // GetTotalAmount 获取购物车图书金额总和
-func (c *Cart)GetTotalAmount()int64{
-	var totalAmount int64
+func (c *Cart)GetTotalAmount()float64{
+	var totalAmount float64
 	for _,v := range c.CartItems{
-		totalAmount = totalAmount + v.Amount
+		totalAmount = totalAmount + v.GetAmount()
 	}
 	return totalAmount
 }

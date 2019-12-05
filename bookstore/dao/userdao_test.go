@@ -26,7 +26,13 @@ func TestSession(t *testing.T){
 	// t.Run("测试插入session",addsession)
 	// t.Run("测试删除session",delsession)
 	t.Run("测试查询session",getSessionById)
+	t.Run("测试插入购物车",addCartItem)
+
 }
+
+// func TestCarts(t *testing.T){
+// 	t.Run("测试插入购物车",addCartItem)
+// }
 
 // 插入信息
 func saveuser(t *testing.T){
@@ -152,5 +158,46 @@ func delsession(t *testing.T){
 		return
 	}else{
 		fmt.Println("session删除成功")
+	}
+}
+
+// 测试插入购物车 插入购物项
+func addCartItem(t *testing.T){
+	book := &model.Book{
+		Id : 1,
+		Price : 10,
+	}
+
+	book2 := &model.Book{
+		Id : 2,
+		Price : 10,
+	}
+
+	// 创建一个购物项slice
+	var cartItems []*model.CartItem
+	// 创建两个购物项
+	cartItem := &model.CartItem{
+		Book : book,
+		Count : 10,
+		CartId : 1111,
+	}
+	cartItems = append(cartItems,cartItem)
+	cartItem2 := &model.CartItem{
+		Book : book2,
+		Count : 10,
+		CartId : 1111,
+	}
+	cartItems = append(cartItems,cartItem2)
+	// 创建购物车
+	cart := &model.Cart{
+		CartId : "1111",
+		CartItems : cartItems,
+		UserId : 1,
+	}
+	err := AddCart(cart)
+	if err != nil{
+		fmt.Println("购物车插入失败",err)
+	}else{
+		fmt.Println("购物车插入成功")
 	}
 }
