@@ -27,6 +27,8 @@ func main(){
 	http.HandleFunc("/getPageBooksByPrice",controller.GetPageBooksByPrice)
 	// 添加一本图书
 	http.HandleFunc("/addBook",controller.AddBook)
+	// 添加图书到购物车
+	http.HandleFunc("/addBookTwoCart",controller.AddBookTwoCart)
 	// 删除一本图书
 	http.HandleFunc("/deleteBook",controller.DeleteBook)
 	// 获取要修改图书资料

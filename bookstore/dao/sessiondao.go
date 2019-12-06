@@ -43,7 +43,7 @@ func DelSession(sessionId string)error{
 }
 
 // 判断用户是否登录
-func IsLogin(q *http.Request)(bool,string){
+func IsLogin(q *http.Request)(bool,*model.Session){
 	cookie,_ := q.Cookie("user")
 	if cookie != nil{
 		// 获取cookie的value
@@ -52,9 +52,9 @@ func IsLogin(q *http.Request)(bool,string){
 		session,_ := GetSessionById(cookieValue)
 		if session.UserId > 0{
 			// 已经登录
-			return true,session.UserName
+			return true,session
 		}
 	}
 	// 没有登录
-	return false,""
+	return false,nil
 }

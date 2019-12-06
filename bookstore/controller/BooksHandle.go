@@ -21,11 +21,11 @@ func IndexHandler(w http.ResponseWriter,q *http.Request){
 	// 获取带分页的图书函数
 	page,_ := dao.GetPageBooks(pageNo)
 	// 调用IsLogin判断用户是否登录成功过
-	flag,username := dao.IsLogin(q)
+	flag,session := dao.IsLogin(q)
 		if flag{
 			// 已经登录 设置page里的两个字段IsLogin Username
 			page.IsLogin = true
-			page.Username = username
+			page.Username = session.UserName
 		}
 
 	t := template.Must(template.ParseFiles("views/index.html"))
@@ -155,3 +155,4 @@ func GetPageBooksByPrice(w http.ResponseWriter,q *http.Request){
 	t := template.Must(template.ParseFiles("views/index.html"))
 	t.Execute(w,page)
 }
+
