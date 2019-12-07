@@ -6,7 +6,6 @@ type CartItem struct{
 	Book *Book	// 购物项图书信息book结构体类型
 	Count int64	// 购物项中图书数量
 	Amount	int64 // 购物项中图书金额小计
-	// CartId int64 // 购物车Id
 	CartId string // 购物车Id
 }
 

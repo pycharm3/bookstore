@@ -39,3 +39,15 @@ func GetCartByUserId(uesrId int)(*model.Cart,error){
 	cart.CartItems = cartItems
 	return cart,nil
 }
+
+// 更新购物车的总数量和总金额
+func UpdateCart(cart *model.Cart)error{
+	// 写sql
+	sqlstr := "update carts set total_count = ? , total_amount = ? where id = ?"
+	// 执行
+	_,err := utils.Db.Exec(sqlstr,cart.GetTotalCount(),cart.GetTotalAmount(),cart.CartId)
+	if err != nil{
+		return err
+	}
+	return nil
+}

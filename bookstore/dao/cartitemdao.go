@@ -3,6 +3,7 @@ package dao
 import (
 	"bookstore/utils"
 	"bookstore/model"
+	"fmt"
 )
 
 // 向数据库中插入购物项cartItem
@@ -16,18 +17,21 @@ func AddCartItem(cartItem *model.CartItem)error{
 	return nil
 }
 
-// GetCartItemByBookId 根据图书Id获取对应购物项
-func GetCartItemByBookId(bookId string)(*model.CartItem,error){
+// GetCartItemByBookId 根据图书Id和购物车Id获取对应购物项
+func GetCartItemByBookIdAndCartId(bookId string,cartId string)(*model.CartItem,error){
 	// 写sql
-	sqlstr := "select id,count,amount,cart_id from cart_items where book_id = ?"
+	sqlstr := "select id,count,amount,cart_id from cart_items where book_id = ? and cart_id = ?"
+	
 	// 执行sql
-	row := utils.Db.QueryRow(sqlstr,bookId)
+	fmt.Printf("看看sql,%T,%T,%T",sqlstr,bookId,cartId)
+	row := utils.Db.QueryRow(sqlstr, bookId, cartId)
 	// 创建CartItem实例接收查询结果
 	cartItem := &model.CartItem{}
 	err := row.Scan(&cartItem.CartItemId,&cartItem.Count,&cartItem.Amount,&cartItem.CartId)
 	if err != nil{
 		return nil,err
 	}
+	fmt.Println(cartItem)
 	return cartItem,nil
 }
 
