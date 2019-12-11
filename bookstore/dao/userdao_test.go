@@ -31,9 +31,14 @@ import (
 
 func TestCarts(t *testing.T){
 	// t.Run("测试插入购物车",addCartItem)
-	// t.Run("测试根据图书id查询购物项",getCartItemByBookId)
+	// t.Run("测试根据图书id和购物车id查询购物项",getCartItemByBookIdAndCartId)
 	// t.Run("测试根据购物车id查询购物项", getCartItemByCartId)
-	t.Run("测试根据用户id查询购物项", getCartByUserId)
+	// t.Run("测试根据用户id查询购物项", getCartByUserId)
+	// t.Run("测试跟据图书Id/购物车Id/图书数量更新购物项中图书数量", updateBookCount)
+	// t.Run("测试跟据图书Id获取购物项", getCartItemById)
+	// t.Run("测试跟据图书Id删除购物项", delCartItemById)
+	// t.Run("测试跟据购物车Id清空购物车", emptyCart)
+	
 }
 
 // 插入信息
@@ -181,13 +186,13 @@ func addCartItem(t *testing.T){
 	cartItem := &model.CartItem{
 		Book : book,
 		Count : 10,
-		CartId : 1111,
+		CartId : "1111",
 	}
 	cartItems = append(cartItems,cartItem)
 	cartItem2 := &model.CartItem{
 		Book : book2,
 		Count : 10,
-		CartId : 1111,
+		CartId : "1111",
 	}
 	cartItems = append(cartItems,cartItem2)
 	// 创建购物车
@@ -204,9 +209,9 @@ func addCartItem(t *testing.T){
 	}
 }
 
-// 测试根据图书id查询当前购物项
-func getCartItemByBookId(t *testing.T){
-	cartItem,err := GetCartItemByBookId("9")
+// 测试根据图书id和购物车Id查询当前购物项
+func getCartItemByBookIdAndCartId(t *testing.T){
+	cartItem,err := GetCartItemByBookIdAndCartId("bookId","cartId")
 	if err != nil{
 		fmt.Println("查询失败",err)
 	}else{
@@ -233,5 +238,38 @@ func getCartByUserId(t *testing.T){
 		fmt.Println("查询失败，错误信息: ",err)
 	}else{
 		fmt.Println("查询成功，购物车为: ",cart)
+	}
+}
+
+// 跟据图书Id/购物车Id/图书数量更新购物项中图书数量
+func updateBookCount(t *testing.T){
+	err := UpdateBookCount(nil)
+	if err != nil{
+		fmt.Println("err = ",err)
+	}
+}
+
+// 跟据购物项Id获取购物项
+func getCartItemById(t *testing.T){
+	cartItem,err := GetCartItemById("20")
+	if err != nil{
+		fmt.Println("GetCartItemById err = ",err)
+	}
+	fmt.Println(cartItem)
+}
+
+// 跟据购物项Id删除购物项
+func delCartItemById(t *testing.T){
+	err := DelCartItemById("18")
+	if err != nil{
+		fmt.Println("DelCartItemById err = ",err)
+	}
+}
+
+// 跟据购物车Id清空购物车
+func emptyCart(t *testing.T){
+	err := EmptyCart("")
+	if err != nil{
+		fmt.Println("EmptyCart err = ",err)
 	}
 }

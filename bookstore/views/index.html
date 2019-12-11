@@ -7,6 +7,7 @@
 <script src="/static/script/jquery-1.7.2.js"></script>
 <script>
 	$(function(){
+		// $("#show").hide();
 		// 给添加购物车的按钮绑定单击事件
 		$(".addBookTwoCart").click(function(){
 			// 获取要添加的图书id
@@ -17,7 +18,13 @@
 			var param = {"bookId":bookId}
 			// 发送Ajax请求
 			$.post(url,param,function(res){
-
+				// 将响应的书名信息设置到span中
+				// $("#show").show();
+				if(res == "请先登录"){
+					location = "/pages/user/login.html"
+				}else{
+					$("#bookmsg").text(res)
+				}
 			});
 		});
 	});
@@ -31,7 +38,7 @@
 			{{if .IsLogin}}
 			<div>
 				<span>欢迎<span class="um_span">{{.Username}}</span>光临尚硅谷书城</span>
-				<a href="/pages/cart/cart.html">购物车</a>
+				<a href="/getCartInfo">购物车</a>
 				<a href="/logout">注销</a>&nbsp;&nbsp;
 				<a href="/main">返回</a>
 			</div>
@@ -39,7 +46,6 @@
 			<div>
 				<a href="/pages/user/login.html">登录</a> | 
 				<a href="/pages/user/regist.html">注册</a> &nbsp;&nbsp;
-				<a href="/pages/cart/cart.html">购物车</a>
 				<a href="/pages/manager/manager.html">后台管理</a>
 			</div>
 			{{end}}
@@ -55,9 +61,10 @@
 			</form>
 
 			<div style="text-align: center">
-				<span>您的购物车中有3件商品</span>
+				<!-- <span>您的购物车中有3件商品</span> -->
 				<div>
-					您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
+					<!-- <span id = "show">您刚刚将<span style="color: red" id = "bookmsg">时间简史</span>加入到了购物车中</span> -->
+					<span style="color: red" id = "bookmsg"></span>
 				</div>
 			</div>
 

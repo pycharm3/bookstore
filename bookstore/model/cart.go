@@ -7,6 +7,7 @@ type Cart struct{
 	TotalCount	int64		// 购物车中图书总数，通过计算得到
 	TotalAmount	 float64	// 购物车图书总金额，计算得到
 	UserId	int	 			// 购物车所属用户id
+	UserName string			// 添加一个用户名用于购物车页面显示用户名
 }
 
 // GetTotalCount 获取购物车图书总数量

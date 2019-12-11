@@ -34,9 +34,9 @@ func IndexHandler(w http.ResponseWriter,q *http.Request){
 
 // 获取所有图书
 func GetBooksHandler(w http.ResponseWriter,q *http.Request){
-	books,_ := dao.Getbooks()
+	Books,_ := dao.Getbooks()
 	t := template.Must(template.ParseFiles("views/pages/manager/book_manager.html"))
-	t.Execute(w,books)
+	t.Execute(w,Books)
 }
 
 // 带分页获取所有图书
@@ -89,7 +89,8 @@ func DeleteBook(w http.ResponseWriter,q *http.Request){
 	if err != nil{
 		return
 	}
-	GetBooksHandler(w,q)
+	// GetBooksHandler(w,q)
+	GetPageBooksHandler(w,q)
 }
 
 // 获取要修改图书

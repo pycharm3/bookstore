@@ -29,6 +29,12 @@ func main(){
 	http.HandleFunc("/addBook",controller.AddBook)
 	// 添加图书到购物车
 	http.HandleFunc("/addBookTwoCart",controller.AddBookTwoCart)
+	// 从购物车删除一本图书
+	http.HandleFunc("/deleteCartBook",controller.DeleteCartBook)
+	// 清空购物车
+	http.HandleFunc("/emptyCart",controller.EmptyCart)
+	// 获取购物车信息
+	http.HandleFunc("/getCartInfo",controller.GetCartInfo)
 	// 删除一本图书
 	http.HandleFunc("/deleteBook",controller.DeleteBook)
 	// 获取要修改图书资料

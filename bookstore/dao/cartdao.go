@@ -5,7 +5,7 @@ import (
 	"bookstore/utils"
 )
 
-// 向购物车表中插入购物车
+// 向数据库中插入购物车
 func AddCart(cart *model.Cart)error{
 	//将购物车插入到数据库中
 	sqlstr := "insert into carts(id,total_count,total_amount,user_id)values(?,?,?,?)"
