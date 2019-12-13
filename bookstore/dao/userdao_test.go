@@ -4,6 +4,7 @@ import (
 	"testing"
 	"fmt"
 	"bookstore/model"
+	"time"
 )
 
 // func TestUser(t *testing.T){
@@ -29,7 +30,7 @@ import (
 
 // }
 
-func TestCarts(t *testing.T){
+// func TestCarts(t *testing.T){
 	// t.Run("测试插入购物车",addCartItem)
 	// t.Run("测试根据图书id和购物车id查询购物项",getCartItemByBookIdAndCartId)
 	// t.Run("测试根据购物车id查询购物项", getCartItemByCartId)
@@ -38,7 +39,16 @@ func TestCarts(t *testing.T){
 	// t.Run("测试跟据图书Id获取购物项", getCartItemById)
 	// t.Run("测试跟据图书Id删除购物项", delCartItemById)
 	// t.Run("测试跟据购物车Id清空购物车", emptyCart)
-	
+// }
+
+func TestOrder(t *testing.T){
+	// t.Run("测试插入订单 ",addOrder)
+	// t.Run("测试插入订单 ",addOrderItem)
+	// t.Run("test get all order",getOrders)
+	// t.Run("test getOrderItemsByorderId",getOrderItemByOrderId)
+	// t.Run("test getOrderByUserId",getOrderByUserId)
+	// t.Run("test update orderState",updateOrderState)
+	t.Run("test delOrder",delOrder)
 }
 
 // 插入信息
@@ -271,5 +281,87 @@ func emptyCart(t *testing.T){
 	err := EmptyCart("")
 	if err != nil{
 		fmt.Println("EmptyCart err = ",err)
+	}
+}
+
+// 测试插入订单
+func addOrder(t *testing.T){
+	timeStr := time.Now().Format("2006-01-02 15:04:05")
+	order := &model.Order{
+		OrderId : "11111",
+		CreateTime : timeStr,
+		TotalCount : 100,
+		TotalAmount : 100.24,
+		State : 0,
+		UserId : 7,
+	}
+	err := AddOrder(order)
+	if err != nil{
+		fmt.Println("AddOrder err = ",err)
+	}
+}
+
+// 测试插入订单项
+func addOrderItem(t *testing.T){
+	orderItem := &model.OrderItem{
+		Count : 10,
+		Amount : 5000.80,
+		Title : "富婆概论",
+		Author : "mrli",
+		Price : 28.6,
+		ImgPath : "/page/default.jpg",
+		OrderId : "11111",
+	}
+	err := AddOrderItem(orderItem)
+	if err != nil{
+		fmt.Println("AddOrderItem err = ",err)
+	}
+}
+
+func getOrders(t *testing.T){
+	orders,err := GetOrders()
+	if err != nil{
+		fmt.Println("GetOrders() err = ",err)
+	}
+	for _,v := range orders{
+		fmt.Println("get all order is",v)
+	}
+}
+
+// 测试跟据订单号(订单项Id)获取该订单中所有订单项
+func getOrderItemByOrderId(t *testing.T){
+	orderItems,err := GetOrderItemByOrderId("968db3f4-44db-4a14-491b-8bf3128ac8ed")
+	if err != nil{
+		fmt.Println("GetOrderItemByOrderId() err = ",err)
+	}
+	for _,v := range orderItems{
+		fmt.Println("getOrderItemByorderId",v)
+	}
+}
+
+// 跟据用户Id获取当前用户的所有订单
+func getOrderByUserId(t *testing.T){
+	orders,err := GetMyOrders(7)
+	if err != nil{
+		fmt.Println("GetMyOrders() err = ",err)
+	}
+	for _,v := range orders{
+		fmt.Println("当前用户订单为: ",v)
+	}
+}
+
+// 跟据orderId修改orderState
+func updateOrderState(t *testing.T){
+	err := UpdateOrderStateTwo("3e1613ee-872c-4b23-57d4-d6266c321468")
+	if err != nil{
+		fmt.Println("UpdateOrderState() err = ",err)
+	}
+}
+
+// 跟据orderId删除Order
+func delOrder(t *testing.T){
+	err := DelOrder("3e1613ee-872c-4b23-57d4-d6266c321468")
+	if err != nil{
+		fmt.Println("DelOrder() err = ",err)
 	}
 }

@@ -12,6 +12,7 @@
 			{{if .UserId}}
 			<div>
 				<span>欢迎<span class="um_span">{{.UserName}}</span>光临尚硅谷书城</span>
+				<a href="/getMyOrder">我的订单</a>
 				<a href="/logout">注销</a>&nbsp;&nbsp;
 				<a href="/main">返回</a>
 			</div>
@@ -21,6 +22,7 @@
 				<a href="/pages/user/regist.html">注册</a> &nbsp;&nbsp;
 				<a href="/pages/cart/cart.html">购物车</a>
 				<a href="/pages/manager/manager.html">后台管理</a>
+				<a href="/getOrders">订单管理</a>
 			</div>
 			{{end}}
 	</div>
@@ -50,7 +52,7 @@
 			<span class="cart_span">购物车中共有<span class="b_count">{{.Cart.TotalCount}}</span>件商品</span>
 			<span class="cart_span">总金额<span class="b_price">{{.Cart.TotalAmount}}</span>元</span>
 			<span class="cart_span"><a href="/emptyCart?cartId={{.Cart.CartId}}">清空购物车</a></span>
-			<span class="cart_span"><a href="/pages/cart/checkout.html">去结账</a></span>
+			<span class="cart_span"><a href="/checkOut">去结账</a></span>
 		</div>
 		{{else}}
 		<h1>您的购物车已经饥渴难耐了,快去 <a href="/main" style="color: seagreen;">购物</a> 吧</h1>

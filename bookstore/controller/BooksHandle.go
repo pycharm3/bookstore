@@ -6,7 +6,6 @@ import (
 	"bookstore/model"
 	"text/template"
 	"strconv"
-	
 )
 
 // 写一个去首页的处理器handler
@@ -129,7 +128,6 @@ func UpdateBook(w http.ResponseWriter,q *http.Request){
 	}
 	dao.AddBook(book)
 	// 添加完查询
-	// GetBooksHandler(w,q)
 	GetPageBooksHandler(w,q)
 }
 
@@ -152,7 +150,7 @@ func GetPageBooksByPrice(w http.ResponseWriter,q *http.Request){
 		page.MinPrice = min
 		page.MaxPrice = max
 	}
-	
+
 	t := template.Must(template.ParseFiles("views/index.html"))
 	t.Execute(w,page)
 }

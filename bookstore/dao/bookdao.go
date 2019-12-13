@@ -152,5 +152,6 @@ func GetPageBooksByPrice(pageNo string,minPrice string,maxPrice string)(*model.P
 		TotalPageNo : totalPageNo,
 		TotalRecord : totalRecord,
 	}
+	
 	return page,nil
 }

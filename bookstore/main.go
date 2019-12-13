@@ -41,5 +41,19 @@ func main(){
 	http.HandleFunc("/toUpdateBookPage",controller.ToUpdateBook)
 	// 修改图书
 	http.HandleFunc("/updateBook",controller.UpdateBook)
+	// 结账
+	http.HandleFunc("/checkOut",controller.CheckOut)
+	// 获取所有订单
+	http.HandleFunc("/getOrders",controller.GetAllOrder)
+	// 查看订单详情
+	http.HandleFunc("/getOrderInfo",controller.GetOrderItemsByOrderId)
+	// 查看我的订单
+	http.HandleFunc("/getMyOrder",controller.GetMyOrders)
+	// 发货
+	http.HandleFunc("/sendOrder",controller.SendOrder)
+	// 确认收货
+	http.HandleFunc("/orderOk",controller.OrderOk)
+	// 删除已完成订单
+	http.HandleFunc("/delOrder",controller.DelOrder)
 	http.ListenAndServe(":8080",nil)
 }
