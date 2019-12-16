@@ -150,7 +150,15 @@ func GetPageBooksByPrice(w http.ResponseWriter,q *http.Request){
 		page.MinPrice = min
 		page.MaxPrice = max
 	}
+	//调用IsLogin函数判断是否已经登录
+	flag, session := dao.IsLogin(q)
 
+	if flag {
+		//已经登录，设置page中的IsLogin字段和Username的字段值
+		page.IsLogin = true
+		page.Username = session.UserName
+	}
+	
 	t := template.Must(template.ParseFiles("views/index.html"))
 	t.Execute(w,page)
 }
